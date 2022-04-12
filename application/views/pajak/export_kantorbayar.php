@@ -46,7 +46,7 @@ $query = $ci->db->get()->result_array();
 
                     $ci->db->select('*');
                     $ci->db->from('dbpn');
-                    $ci->db->where('p_bln', '02');
+                    $ci->db->where('p_bln', '04');
                     $ci->db->where('p_thn', '2022');
                     $ci->db->where('lokgj', $b['lokgj']);
                     echo $ci->db->count_all_results();
@@ -55,13 +55,13 @@ $query = $ci->db->get()->result_array();
                     <?php
                     $ci->db->select_sum('mp');
                     $ci->db->where('kd_bank', $b['lokgj']);
-                    $ci->db->where('p_bln', '02');
+                    $ci->db->where('p_bln', '04');
                     $ci->db->where('p_thn', '2022');
                     $mp = $ci->db->get('pajak')->row_array();
 
                     $ci->db->select_sum('pajak');
                     $ci->db->where('kd_bank', $b['lokgj']);
-                    $ci->db->where('p_bln', '02');
+                    $ci->db->where('p_bln', '04');
                     $ci->db->where('p_thn', '2022');
                     $pjk = $ci->db->get('pajak')->row_array();
 
@@ -73,7 +73,7 @@ $query = $ci->db->get()->result_array();
                     <?php
                     $ci->db->select_sum('pajak_bln');
                     $ci->db->where('lokgj', $b['lokgj']);
-                    $ci->db->where('p_bln', '01');
+                    $ci->db->where('p_bln', '03');
                     $ci->db->where('p_thn', '2022');
                     $pjk_lm = $ci->db->get('dbpn')->row_array();
 

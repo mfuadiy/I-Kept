@@ -52,7 +52,7 @@ class Surat extends CI_Controller
 
         //load library
         $this->load->library('pagination');
-        $config['base_url'] = 'http://localhost:8080/sidak/surat/suratmasuk';
+        $config['base_url'] = 'http://localhost/sidak/surat/suratmasuk';
         //Ambil Data Keyword
         if ($this->input->post('submit')) {
             $data['keyword'] = $this->input->post('keyword');
@@ -100,7 +100,7 @@ class Surat extends CI_Controller
 
         $config['attributes'] = array('class' => 'page-link');
         // Initialize
-        // $this->pagination->initialize($config);
+        $this->pagination->initialize($config);
 
 
         $data['start'] = $this->uri->segment(3);
@@ -276,7 +276,7 @@ class Surat extends CI_Controller
                 echo $this->upload->display_errors();
             }
         }
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your Profile Has Been Updated</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Surat Berhasil Di Updated</div>');
         redirect('surat/suratmasuk');
     }
     public function excel5()

@@ -18,6 +18,15 @@ header("Expires: 0");
             <th>NPK</th>
             <th>Nomor Pensiun</th>
             <th>Nama Peserta</th>
+            <th>Tanggal Lahir</th>
+            <th>Usia</th>
+            <th>Alamat</th>
+            <th>RT/RW</th>
+            <th>Kelurahan</th>
+            <th>Kecamatan</th>
+            <th>Kota</th>
+            <th>Telepon</th>
+            <th>No HP</th>
             <th>Bank Bayar</th>
             <th>Nomor Rekening</th>
             <th>Nama Bank</th>
@@ -41,6 +50,21 @@ header("Expires: 0");
                 <td><?= $p['npk']; ?></td>
                 <td><?= $p['nopen']; ?></td>
                 <td><?= $p['nama']; ?></td>
+                <td><?= $p['tglhr']; ?></td>
+                <td><?php
+                    $now        = new DateTime();
+                    $lhr        = new DateTime($p['tglhr']);
+                    $intervallhr = "";
+                    $intervallhr = date_diff($lhr, $now);
+                    echo $intervallhr->y;
+                    ?></td>
+                <td><?= $p['alamat']; ?></td>
+                <td>'<?= $p['rt_rw']; ?></td>
+                <td><?= $p['kelurahan']; ?></td>
+                <td><?= $p['kecamatan']; ?></td>
+                <td><?= $p['kota']; ?></td>
+                <td>'<?= $p['telp']; ?></td>
+                <td>'<?= $p['hp']; ?></td>
                 <td><?= $p['lokgj']; ?></td>
                 <td>'<?= $p['rc_bank']; ?></td>
                 <td><?php

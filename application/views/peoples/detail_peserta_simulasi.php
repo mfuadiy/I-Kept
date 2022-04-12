@@ -254,7 +254,7 @@ if (isset($_POST['hitung'])) {
 	//Perhitungan MP Sekaligus, MP Sekaligus 20% sampai dengan MP berkala 80%
 	$mpsek 		= $mp * $fgus;
 	$mpsek20	= $mpsek * 0.2;
-	$sek2050 	= round(($mpsek20 - 60000000), -2);
+	$sek2050 	= round(($mpsek20 - 50000000), -2);
 	// $mpsek2050 	= round(($mpsek20 - 60000000), -2);
 	$mpsek2050  = 0;
 	if ($sek2050 < 0) {
@@ -264,7 +264,7 @@ if (isset($_POST['hitung'])) {
 	}
 	$mp80 		= $mp * 0.8;
 
-	$sek2120	= round((($mpsek20 - 60000000) * 0.05), -2);
+	$sek2120	= round((($mpsek20 - 50000000) * 0.05), -2);
 	// $pph2120	= round((($mpsek20-60000000) * 0.05), -2);
 	$pph2120	= 0;
 	if ($sek2120 < 0) {
@@ -275,11 +275,20 @@ if (isset($_POST['hitung'])) {
 
 	$bp 		= 0;
 
-	if ($mp80 < 4000000) {
-		$bp = $mp80 * 0.05;
+	if (isset($persen20)) {
+		if ($mp80 < 4000000) {
+			$bp = $mp80 * 0.05;
+		} else {
+			$bp = 200000;
+		}
 	} else {
-		$bp = 200000;
+		if ($mp < 4000000) {
+			$bp = $mp * 0.05;
+		} else {
+			$bp = 200000;
+		}
 	}
+
 
 	$bln 		= date('m', strtotime($henti));
 	$p_bln      = intval($bln);
@@ -297,7 +306,7 @@ if (isset($_POST['hitung'])) {
 	} else {
 		$mpnetto	= ($mp - $bp) * $sisabln;
 	}
-	var_dump($sisabln);
+
 	// die();
 	$hasil_tahun = $mpnetto + $penghasilan;
 	$p_pkp 		= round(($hasil_tahun - $ptkp), -3);
@@ -367,6 +376,7 @@ function rupiah($angka)
 $gaji 	= $alldata['phdp'];
 $hasil 	= $gaji;
 $sisaMsBk = $sisaMb->y;
+
 ?>
 
 <div class="container">

@@ -53,7 +53,7 @@ class Datul_model extends CI_Model
             $this->db->or_like('no_agenda', $keyword);
         }
         $this->db->order_by('date_created', 'DESC');
-        return $this->db->get()->result_array();
+        return $this->db->get('', $limit, $start)->result_array();
     }
 
     public function getSurat()

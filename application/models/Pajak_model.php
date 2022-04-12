@@ -17,9 +17,9 @@ class Pajak_model extends CI_Model
         $this->db->select('*');
         $this->db->from('dbpnm_pn');
         $this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk', 'right');
-        $this->db->where('dbpn.p_bln', '02');
+        $this->db->where('dbpn.p_bln', '03');
         $this->db->where('dbpn.p_thn', '2022');
-        $this->db->order_by('dbpnm_pn.nama', 'ASC');
+        $this->db->order_by('dbpn.nama', 'ASC');
         $query = $this->db->get()->result_array();
         return ($query);
     }
@@ -27,12 +27,12 @@ class Pajak_model extends CI_Model
     public function getBank()
     {
         $this->db->select('*');
-        $this->db->from('dbpnm_pn');
-        $this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk', 'right');
-        $this->db->where('dbpn.p_bln', '02');
-        $this->db->where('dbpn.p_thn', '2022');
-        $this->db->order_by('dbpnm_pn.lokgj', 'ASC');
-        $this->db->group_by('dbpnm_pn.lokgj');
+        $this->db->from('dbpn');
+        //$this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk', 'right');
+        $this->db->where('p_bln', '04');
+        $this->db->where('p_thn', '2022');
+        $this->db->order_by('lokgj', 'ASC');
+        $this->db->group_by('lokgj');
         $query = $this->db->get()->result_array();
         return ($query);
     }
@@ -43,7 +43,7 @@ class Pajak_model extends CI_Model
         $this->db->from('dbpnm_pn');
         $this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk', 'right');
         $this->db->where('dbpnm_pn.npk', $npk);
-        $this->db->where('dbpn.p_bln', '02');
+        $this->db->where('dbpn.p_bln', '04');
         $this->db->where('dbpn.p_thn', '2022');
         $this->db->order_by('dbpnm_pn.nama', 'ASC');
         $query = $this->db->get()->row_array();

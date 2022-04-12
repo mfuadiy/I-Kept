@@ -9,18 +9,19 @@ function rupiah($angka)
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">DAFTAR PESERTA PASIF</h3>
+            <h3 class="m-0 font-weight-bold text-primary">DAFTAR PESERTA PASIF BULAN</h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <a href="<?= base_url('pajak/export'); ?>" class="btn btn-success">Export Data Excel</a>
                 <a href="<?= base_url('pajak/kantor_bayar'); ?>" class="btn btn-success">Export Rekap Kantor Bayar</a>
+                <a href="<?= base_url('pajak/analisa'); ?>" class="btn btn-danger">Analisa</a>
                 <br><br>
 
                 <table class="table table-bordered" id="dataTableUser" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>NPK</th>
                             <th>Nomor Pensiun</th>
                             <th>Nama Peserta</th>

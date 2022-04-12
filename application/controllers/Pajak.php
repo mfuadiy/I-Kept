@@ -68,6 +68,15 @@ class Pajak extends CI_Controller
         $this->load->view('pajak/export_pajak', $data);
     }
 
+    public function analisa()
+    {
+
+        $data['title']      = 'Analisa Peserta';
+        $data['pensiun']    = $this->pajak->getPensiun();
+
+        $this->load->view('pajak/analisa', $data);
+    }
+
     public function kantor_bayar()
     {
 
