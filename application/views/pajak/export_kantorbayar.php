@@ -63,7 +63,7 @@ $query = $ci->db->get()->result_array();
 
                     $ci->db->select_sum('pajak');
                     $ci->db->where('kd_bank', $b['lokgj']);
-                    $ci->db->where('p_bln', '04');
+                    $ci->db->where('p_bln', '05');
                     $ci->db->where('p_thn', '2022');
                     $pjk = $ci->db->get('pajak')->row_array();
 
