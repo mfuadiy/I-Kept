@@ -309,14 +309,21 @@ if (isset($_POST['hitung'])) {
 
 	// die();
 	$hasil_tahun = $mpnetto + $penghasilan;
-	$p_pkp 		= round(($hasil_tahun - $ptkp), -3);
+
+	$p_pkp_1 		= $hasil_tahun - $ptkp;
+	$_p_pkp = substr($p_pkp_1, 0, -3) . "000";
+	$p_pkp = intval($_p_pkp);
 
 	if ($p_pkp < 0) {
 		$pkp = 0;
 	} else {
 		$pkp = $p_pkp;
 	}
-	$pkp 		= round(($hasil_tahun - $ptkp), -3);
+
+	$pkp_1 		= $hasil_tahun - $ptkp;
+	$_pkp = substr($pkp_1, 0, -3) . "000";
+	$pkp = intval($_pkp);
+
 	$pph5 		= 60000000 * 0.05;
 	$pph15 		= 190000000 * 0.15;
 	$pph25 		= 250000000 * 0.25;
@@ -363,7 +370,16 @@ if (isset($_POST['hitung'])) {
 
 	$pph21thn 	= $pph5 + $pph15 + $pph25 + $pph30 + $pph35;
 	$pph21mpber	= ($pph21thn - $setor) / $sisabln;
-	$totpenmp 	= $mp - $pph21mpber;
+	$totpenmp 	= "";
+	if (isset($_POST['persen20'])) {
+		$totpenmp 	= $mp80 - $pph21mpber;
+	} else {
+		$totpenmp 	= $mp - $pph21mpber;
+	}
+
+	$totalmp_pajak = ((($mp - $bp) * 12) - $ptkp);
+
+
 	$totpenmp80 = $mp80 - $pph21mpber;
 }
 
@@ -780,23 +796,31 @@ $sisaMsBk = $sisaMb->y;
 
 								<div class="form-group row">
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Proyeksi Nilai Sekarang Manfaat Pensiun <br>
-										<small style="color: blue;"><?= $fgus; ?> x Manfaat Pensiun</small></label>
+										<small style="color: blue;"><?= $fgus; ?> x <?= rupiah($mp); ?></small></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="p_mpsek" id="p_mpsek" value="<?php error_reporting(0);
 																													echo rupiah($mpsek); ?>">
 									</div>
 								</div>
 
-								<div class="form-group row">
+								<div class="form-group row" <?php if (isset($_POST['persen20'])) {
+																echo "";
+															} else {
+																echo "hidden";
+															} ?>>
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Proyeksi MP Sekaligus 20% <br>
-										<small style="color: blue;">Nilai Sekarang MP x 20%</small></label>
+										<small style="color: blue;"><?= rupiah($mpsek); ?> x 20%</small></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="p_mpsek20" id="p_mpsek20" value="<?php error_reporting(0);
 																														echo rupiah($mpsek20); ?>">
 									</div>
 								</div>
 
-								<div class="form-group row">
+								<div class="form-group row" <?php if (isset($_POST['persen20'])) {
+																echo "";
+															} else {
+																echo "hidden";
+															} ?>>
 									<label for="inputEmail3" class="col-sm-4 col-form-label">PPh 21 MP Sekaligus 20% <br>
 										<small style="color: blue;"><?= rupiah($mpsek20); ?> x 5%</small></label>
 									<div class="col-sm-8">
@@ -805,9 +829,13 @@ $sisaMsBk = $sisaMb->y;
 									</div>
 								</div>
 
-								<div class="form-group row">
+								<div class="form-group row" <?php if (isset($_POST['persen20'])) {
+																echo "";
+															} else {
+																echo "hidden";
+															} ?>>
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Penerimaan MP Sekaligus 20% <br>
-										<small style="color: blue;">Nilai Sekarang MP x 20%</small></label>
+										<small style="color: blue;"><?= rupiah($mpsek20) . " - " . rupiah($pph2120); ?></small></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="p_mp20" id="p_mp20" value="<?php error_reporting(0);
 																													echo rupiah($mpsek20 - $pph2120); ?>">
@@ -816,9 +844,13 @@ $sisaMsBk = $sisaMb->y;
 
 
 
-								<div class="form-group row">
+								<div class="form-group row" <?php if (isset($_POST['persen20'])) {
+																echo "";
+															} else {
+																echo "hidden";
+															} ?>>
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Proyeksi MP Berkala 80% <br>
-										<small style="color: blue;">Manfaat Pensiun x 80%</small></label>
+										<small style="color: blue;"><?= rupiah($mp); ?> x 80%</small></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="p_mp80" id="p_mp80" value="<?php error_reporting(0);
 																													echo rupiah($mp80); ?>">
@@ -833,7 +865,11 @@ $sisaMsBk = $sisaMb->y;
 								</div>
 
 								<div class="form-group row">
-									<label for="inputEmail3" class="col-sm-4 col-form-label">Penghasilan Netto Sebelumnya <?= $p_bln - 1; ?> Bulan</label>
+									<label for="inputEmail3" class="col-sm-4 col-form-label">Penghasilan Netto Sebelumnya <?php if ($penghasilan == 0) {
+																																echo "";
+																															} else {
+																																echo $p_bln - 1 . " Bulan";
+																															} ?></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="hasil_tahun" id="hasil_tahun" value="<?= rupiah($penghasilan); ?>">
 									</div>
