@@ -242,7 +242,11 @@ function rupiah($angka)
                                 }
 
                                 $hasil_tahun    = ($mp_naik - $jabatan) * 12;
-                                $pkp            = floor(($hasil_tahun - $ptkp) / 1000) * 1000;
+                                // $pkp            = floor(($hasil_tahun - $ptkp) / 1000) * 1000;
+
+                                $pkp_1          = $hasil_tahun - $ptkp;
+                                $_pkp           = substr($pkp_1, 0, -3) . "000";
+                                $pkp            = intval($_pkp);
 
                                 $pph5           = 60000000 * 0.05;
                                 $pph15          = 190000000 * 0.15;
