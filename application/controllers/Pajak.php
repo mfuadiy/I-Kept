@@ -72,7 +72,7 @@ class Pajak extends CI_Controller
     {
 
         $data['title']      = 'Analisa Peserta';
-        $data['pensiun']    = $this->pajak->getPensiun();
+        $data['pensiun']    = $this->pajak->getAnalytic();
 
         $this->load->view('pajak/analisa', $data);
     }

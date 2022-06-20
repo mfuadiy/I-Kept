@@ -24,6 +24,20 @@ class Pajak_model extends CI_Model
         return ($query);
     }
 
+    public function getAnalytic()
+    {
+        $this->db->select('*');
+        $this->db->from('dbpnm_pn');
+        $this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk', 'right');
+        $this->db->where('dbpn.p_bln', '06');
+        $this->db->where('dbpn.p_thn', '2022');
+        //$this->db->where("dbpnm_pn.npk LIKE " . "'%88__'");
+        //$this->db->where("dbpnm_pn.tgmlb BETWEEN" . "'1988-01-01'" . "AND" . "'1988-12-31'");
+        $this->db->order_by('dbpn.nama', 'ASC');
+        $query = $this->db->get()->result_array();
+        return ($query);
+    }
+
     public function getBank()
     {
         $this->db->select('*');

@@ -18,6 +18,7 @@ header("Expires: 0");
             <th>NPK</th>
             <th>Nomor Pensiun</th>
             <th>Nama Peserta</th>
+            <th>Tanggal Mulai Bekerja</th>
             <th>Tanggal Lahir</th>
             <th>Usia</th>
             <th>Alamat</th>
@@ -50,6 +51,7 @@ header("Expires: 0");
                 <td><?= $p['npk']; ?></td>
                 <td><?= $p['nopen']; ?></td>
                 <td><?= $p['nama']; ?></td>
+                <td><?= $p['tgmlb']; ?></td>
                 <td><?= $p['tglhr']; ?></td>
                 <td><?php
                     $now        = new DateTime();
