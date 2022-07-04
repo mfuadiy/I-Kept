@@ -65,7 +65,7 @@ class Pajak extends CI_Controller
         $data['title']      = 'Rekap Pajak';
         $data['pensiun']    = $this->pajak->getPensiun();
 
-        $this->load->view('pajak/export_pajak', $data);
+        $this->load->view('laporan/export_pajak', $data);
     }
 
     public function analisa()
@@ -74,7 +74,7 @@ class Pajak extends CI_Controller
         $data['title']      = 'Analisa Peserta';
         $data['pensiun']    = $this->pajak->getAnalytic();
 
-        $this->load->view('pajak/analisa', $data);
+        $this->load->view('laporan/analisa', $data);
     }
 
     public function kantor_bayar()
@@ -83,6 +83,6 @@ class Pajak extends CI_Controller
         $data['title']      = 'Rekap Kantor Bayar';
         $data['bank']       = $this->pajak->getBank();
 
-        $this->load->view('pajak/export_kantorbayar', $data);
+        $this->load->view('laporan/export_kantorbayar', $data);
     }
 }
