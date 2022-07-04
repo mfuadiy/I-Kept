@@ -110,7 +110,11 @@ if ($jabatan > 200000) {
 }
 
 $hasil_tahun    = ($pensiun['pen_bln'] - $jabatan) * 12;
-$pkp            = floor(($hasil_tahun - $ptkp) / 1000) * 1000;
+//$pkp            = floor(($hasil_tahun - $ptkp) / 1000) * 1000;
+
+$pkp_1          = $hasil_tahun - $ptkp;
+$_pkp           = substr($pkp_1, 0, -3) . "000";
+$pkp            = intval($_pkp);
 
 $pph5           = 60000000 * 0.05;
 $pph15          = 190000000 * 0.15;
@@ -207,6 +211,13 @@ if ($pkp > 0) {
                 <label for="inputEmail3" class="col-sm-4 col-form-label">PTKP</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="" name="" value="<?= Rupiah($ptkp) ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-4 col-form-label">PKP</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="" name="" value="<?= Rupiah($pkp) ?>" readonly>
                 </div>
             </div>
 

@@ -35,7 +35,9 @@ function rupiah($angka)
                             <th>Pajak Baru</th>
                             <th>Selisih</th>
                             <th>Status Kawin</th>
+                            <th>Penghasilan 1 Tahun</th>
                             <th>PTKP</th>
+                            <th>PKP</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -305,7 +307,9 @@ function rupiah($angka)
                                 <td><?= Rupiah($pph21thn); ?></td>
                                 <td><?= Rupiah($selisih); ?></td>
                                 <td><?= $p['stkwn']; ?></td>
+                                <td><?= Rupiah($hasil_tahun); ?></td>
                                 <td><?= Rupiah($ptkp); ?></td>
+                                <td><?= Rupiah($pkp); ?></td>
                                 <td style="text-align: center;">
                                     <a href="<?= base_url(); ?>pajak/detail/<?= $p['npk']; ?>" class="badge badge-warning">Detail Pajak</a>
                                     <!-- <a href="<?= base_url(); ?>mutasi/data_mutasi/<?= $p['npk']; ?>" class="badge badge-danger">mutasi</a>
