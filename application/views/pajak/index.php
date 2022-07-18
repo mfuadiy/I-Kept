@@ -281,7 +281,7 @@ function rupiah($angka)
                                 }
 
                                 if ($pkp > 500000000 && $pkp < 5000000000) {
-                                    $pph30 = ($pkp - 500000000) * 0.25;
+                                    $pph30 = ($pkp - 500000000) * 0.30;
                                 } else if ($pkp > 5000000000) {
                                     $pph30 = $pph30;
                                 } else {

@@ -1,5 +1,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+
+
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Writer\WriterMultiSheetsAbstract;
+use Box\Spout\Common\Entity\Row;
+
 /**
  * 
  */
@@ -62,6 +73,14 @@ class Peoples extends CI_Controller
 		$this->load->view('templates/topbar', $data);
 		$this->load->view('peoples/index', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function analisaPesertaAktif()
+	{
+		$this->load->model('Peoples_model', 'peoples');
+		$data['title'] 	= 'Lab Peserta Aktif';
+		$data['aktif'] = $this->peoples->getAnalytic();
+		$this->load->view('laporan/analisa-peserta-aktif', $data);
 	}
 
 	public function detail($npk)

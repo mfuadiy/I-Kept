@@ -4,6 +4,8 @@
 			<h3 class="m-0 font-weight-bold text-primary">DAFTAR PESERTA AKTIF</h3>
 		</div>
 		<div class="card-body">
+			<a href="<?= base_url('peoples/analisaPesertaAktif'); ?>" class="btn btn-danger">Analisa Peserta Aktif</a>
+			<br><br>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTableUser" width="100%" cellspacing="0">
 					<thead>

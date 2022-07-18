@@ -133,15 +133,15 @@ class Coba extends CI_Controller
         $writer->addRows($data1); //tambah row data
 
 
-        $writer->addNewSheetAndMakeItCurrent()->setName('Barang 2'); // Sheet baru
-        $singleRow = WriterEntityFactory::createRow($header);
-        $writer->addRow($singleRow); //tambah row untuk header data
-        $writer->addRows($data1); //tambah row data
+        // $writer->addNewSheetAndMakeItCurrent()->setName('Barang 2'); // Sheet baru
+        // $singleRow = WriterEntityFactory::createRow($header);
+        // $writer->addRow($singleRow); //tambah row untuk header data
+        // $writer->addRows($data1); //tambah row data
 
-        $writer->addNewSheetAndMakeItCurrent()->setName('Barang 3'); // Sheet baru
-        $singleRow = WriterEntityFactory::createRow($header);
-        $writer->addRow($singleRow); //tambah row untuk header data
-        $writer->addRows($data1); //tambah row data
+        // $writer->addNewSheetAndMakeItCurrent()->setName('Barang 3'); // Sheet baru
+        // $singleRow = WriterEntityFactory::createRow($header);
+        // $writer->addRow($singleRow); //tambah row untuk header data
+        // $writer->addRows($data1); //tambah row data
 
         // https://opensource.box.com/spout/docs/#new-sheet-creation
 

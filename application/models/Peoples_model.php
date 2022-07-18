@@ -18,7 +18,8 @@ class Peoples_model extends CI_Model
 		// 	$this->db->like('noreg', $keyword);
 		// 	$this->db->or_like('nama_pes', $keyword);
 		// }
-		return $this->db->get('dbpam_pa')->result_array();
+
+		return $this->db->get_where('dbpam_pa', array('st_pes' => 'A'))->result_array();
 	}
 
 	public function getPensiun($limit, $start, $keyword = null)
@@ -34,6 +35,19 @@ class Peoples_model extends CI_Model
 		$this->db->or_where('dbpnm_pn.kota', 'Lhokseumawe');
 		$this->db->order_by('dbpnm_pn.nama', 'ASC');
 		return $this->db->get('', $limit, $start)->result_array();
+	}
+
+	public function getAnalytic()
+	{
+		$this->db->select('dbpnm_pn.npk, dbpnm_pn.nama, dbpnm_pn.tglhr, dbpnm_pn.tgl_wafat');
+		$this->db->from('dbpnm_pn');
+		$this->db->join('dbpn', 'dbpnm_pn.npk = dbpn.npk', 'right');
+		$this->db->where('dbpn.p_bln', '07');
+		$this->db->where('dbpn.p_thn', '2022');
+		$this->db->where('dbpnm_pn.tgl_wafat BETWEEN "2019-06-01" AND "2022-06-30"');
+		$this->db->order_by('dbpnm_pn.tgl_wafat', 'ASC');
+		$query = $this->db->get()->result_array();
+		return ($query);
 	}
 
 	public function getMulai($limit, $start, $keyword = null)
