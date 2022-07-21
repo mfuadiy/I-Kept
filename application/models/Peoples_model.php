@@ -39,13 +39,16 @@ class Peoples_model extends CI_Model
 
 	public function getAnalytic()
 	{
-		$this->db->select('dbpnm_pn.npk, dbpnm_pn.nama, dbpnm_pn.tglhr, dbpnm_pn.tgl_wafat');
-		$this->db->from('dbpnm_pn');
-		$this->db->join('dbpn', 'dbpnm_pn.npk = dbpn.npk', 'right');
-		$this->db->where('dbpn.p_bln', '07');
-		$this->db->where('dbpn.p_thn', '2022');
-		$this->db->where('dbpnm_pn.tgl_wafat BETWEEN "2019-06-01" AND "2022-06-30"');
-		$this->db->order_by('dbpnm_pn.tgl_wafat', 'ASC');
+		// $this->db->select('dbpnm_pn.npk, dbpnm_pn.nama, dbpnm_pn.tglhr, dbpnm_pn.tgl_wafat');
+		// $this->db->from('dbpnm_pn');
+		// $this->db->join('dbpn', 'dbpnm_pn.npk = dbpn.npk', 'right');
+		// $this->db->where('dbpn.p_bln', '07');
+		// $this->db->where('dbpn.p_thn', '2022');
+		// $this->db->where('dbpnm_pn.tgl_wafat BETWEEN "2019-06-01" AND "2022-06-30"');
+		// $this->db->order_by('dbpnm_pn.tgl_wafat', 'ASC');
+		$this->db->select('*');
+		$this->db->from('dbpam_pa');
+		$this->db->where('st_pes', 'A');
 		$query = $this->db->get()->result_array();
 		return ($query);
 	}

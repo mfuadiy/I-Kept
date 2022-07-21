@@ -16,11 +16,9 @@ header("Expires: 0");
             <th>NPK</th>
             <th>Nama Peserta</th>
             <th>Tanggal Lahir</th>
-            <th>Tanggal Wafat</th>
-            <th>Nama Keluarga</th>
-            <th>Tanggal Lahir Keluarga</th>
-            <th>Status Keluarga</th>
-            <th>Keterangan</th>
+            <th>PhDP</th>
+            <th>Unit Kerja</th>
+            <th>Jabatan</th>
         </tr>
     </thead>
     <tbody>
@@ -30,48 +28,24 @@ header("Expires: 0");
         foreach ($aktif as $pa) : ?>
             <tr>
                 <th><?= $i++; ?></th>
-                <td><?= $pa['npk']; ?></td>
-                <td><?= $pa['nama']; ?></td>
-                <td><?= $pa['tglhr']; ?></td>
-                <td><?= $pa['tgl_wafat']; ?></td>
+                <td><?= $pa['noreg']; ?></td>
+                <td><?= $pa['nama_pes']; ?></td>
+                <td><?= $pa['tgl_lhr']; ?></td>
+                <td><?= $pa['phdp']; ?></td>
                 <td>
                     <?php
-                    $query = $this->db->get_where('aw_pn', ['npk' => $pa['npk']])->result_array();
+                    $ci = get_instance();
+                    $result = $ci->db->get_where('cabang', ['cab' => $pa['cab']])->row_array();
+                    $cab = $ci->db->get_where('cabang', ['cab' => $pa['cab']]);
+                    if ($cab->num_rows() > 0) {
+                        echo $result['nama_cab'];
+                    } else {
+                        echo '-';
+                    }
 
                     ?>
-
-                    <?php foreach ($query as $q) : ?>
-                        <?= $q['nama']; ?> <br>
-                    <?php endforeach; ?>
-
                 </td>
-                <td><?php foreach ($query as $q) : ?>
-                        <?= $q['tgl_lhr_aw']; ?> <br>
-                    <?php endforeach; ?>
-                </td>
-                <td>
-                    <?php foreach ($query as $q) : ?>
-                        <?php
-                        if ($q['st_kel'] == "0") {
-                            echo ("Peserta");
-                        } elseif ($q['st_kel'] == "1") {
-                            echo ("Suami/Istri");
-                        } elseif ($q['st_kel'] == "2") {
-                            echo ("Anak");
-                        } elseif ($q['st_kel'] == "3") {
-                            echo ("Orang Tua");
-                        } elseif ($q['st_kel'] == "4") {
-                            echo ("Pihak Ditunjuk");
-                        } else {
-                            echo ("");
-                        }
-                        ?> <br>
-                    <?php endforeach; ?>
-                </td>
-                <td><?php foreach ($query as $q) : ?>
-                        <?= $q['ket']; ?> <br>
-                    <?php endforeach; ?>
-                </td>
+                <td><?= $pa['st_peg']; ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
