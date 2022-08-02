@@ -53,6 +53,7 @@ $b 			= $valkrj->m;
 $s 			= $st_kwn;
 $ptkp 		= 0;
 
+// Penentuan Status Pajak
 switch ($s) {
 	case 'K0':
 		$s = "K0";
@@ -111,6 +112,7 @@ switch ($s) {
 		break;
 }
 
+// Penentuan PTKP
 switch ($st_kwn) {
 	case 'TK':
 		$ptkp = 54000000;
@@ -208,22 +210,22 @@ switch ($st_kwn) {
 }
 
 
-
+// Menentukan Umur Tahun Bulan dan Status Kawin Untuk Penentuan Faktor Sekaligus
 $where = array(
 	'umr_th' 	=> $t,
 	'umr_bln' 	=> $b,
 	'stkwn'		=> $s
 );
-// var_dump($where);
 
 // Kode Codeigneter Untuk Mencari Faktor Sekaligus
 $result 	= $ci->db->get_where('aktuaria', $where)->row_array();
 $fgus 		= floatval($result['fktr_sgus']);
 
-// Perhitungan MP
+// Perhitungan Masa Kerja
 $intervalmk = date_diff($mli, $brnt);
 $mk			= $intervalmk->y + round((($intervalmk->m) / 12), 2);
 
+// Perhitungan Manfaat Pensiun
 if (isset($_POST['hitung'])) {
 
 	if (isset($naik)) {
@@ -251,21 +253,19 @@ if (isset($_POST['hitung'])) {
 		}
 	}
 
-	//Perhitungan MP Sekaligus, MP Sekaligus 20% sampai dengan MP berkala 80%
+	// Perhitungan MP Sekaligus, MP Sekaligus 20% sampai dengan MP berkala 80%
 	$mpsek 		= $mp * $fgus;
 	$mpsek20	= $mpsek * 0.2;
-	$sek2050 	= round(($mpsek20 - 50000000), -2);
-	// $mpsek2050 	= round(($mpsek20 - 60000000), -2);
+	$sek2050 	= round(($mpsek20 - 50000000), -2); // PTKP Pajak Final
+
+	// Perhitungan Pajak Final MP Sekaligus
 	$mpsek2050  = 0;
 	if ($sek2050 < 0) {
 		$mpsek2050  = 0;
 	} else {
 		$mpsek2050 = $sek2050;
 	}
-	$mp80 		= $mp * 0.8;
-
-	$sek2120	= round((($mpsek20 - 50000000) * 0.05), -2);
-	// $pph2120	= round((($mpsek20-60000000) * 0.05), -2);
+	$sek2120	= round(($sek2050  * 0.05), -2);
 	$pph2120	= 0;
 	if ($sek2120 < 0) {
 		$pph2120	= 0;
@@ -273,8 +273,9 @@ if (isset($_POST['hitung'])) {
 		$pph2120 = $sek2120;
 	}
 
-	$bp 		= 0;
-
+	// Perihutngan MP 80% Jika Mengambil MP Sekaligus 20%
+	$mp80 		= $mp * 0.8;
+	$bp 		= 0; //Biaya Jabatan
 	if (isset($persen20)) {
 		if ($mp80 < 4000000) {
 			$bp = $mp80 * 0.05;
@@ -289,7 +290,7 @@ if (isset($_POST['hitung'])) {
 		}
 	}
 
-
+	// Perhitungan Sisa Bulan Pajak
 	$bln 		= date('m', strtotime($henti));
 	$p_bln      = intval($bln);
 	$sisabln	= 13 - $p_bln;
@@ -299,37 +300,38 @@ if (isset($_POST['hitung'])) {
 		$sisabln = $sisabln;
 	}
 
-	// Perhitungan Pajak dan Jika Mengambil 20%
+	// Perhitungan Penentuan Penghasilan Netto 1 Tahun
 	$mpnetto	= "";
 	if (isset($persen20)) {
 		$mpnetto	= ($mp80 - $bp) * $sisabln;
 	} else {
 		$mpnetto	= ($mp - $bp) * $sisabln;
 	}
+	$hasil_tahun 	= $mpnetto + $penghasilan;
 
-	// die();
-	$hasil_tahun = $mpnetto + $penghasilan;
-
-	$p_pkp_1 		= $hasil_tahun - $ptkp;
-	$_p_pkp = substr($p_pkp_1, 0, -3) . "000";
-	$p_pkp = intval($_p_pkp);
-
+	// Perhitungan Penetuan PKP
+	$p_pkp_1 		= round($hasil_tahun - $ptkp);
+	$_p_pkp 		= substr($p_pkp_1, 0, -3) . "000";
+	$p_pkp 			= intval($_p_pkp);
 	if ($p_pkp < 0) {
 		$pkp = 0;
 	} else {
 		$pkp = $p_pkp;
 	}
-
-	$pkp_1 		= $hasil_tahun - $ptkp;
+	$pkp_1 		= round($hasil_tahun - $ptkp);
 	$_pkp = substr($pkp_1, 0, -3) . "000";
 	$pkp = intval($_pkp);
 
+	// Klasifikasi Pajak Progresif
 	$pph5 		= 60000000 * 0.05;
 	$pph15 		= 190000000 * 0.15;
 	$pph25 		= 250000000 * 0.25;
 	$pph30      = 4500000000 * 0.30;
 	$pph35      = ($pkp - 5000000000) * 0.35;
 
+	// Perhitungan Pajak Progresif
+
+	// PPh 5%
 	if ($pkp > 0 && $pkp < 60000000) {
 		$pph5 = $pkp * 0.05;
 	} else if ($pkp > 60000000) {
@@ -338,6 +340,7 @@ if (isset($_POST['hitung'])) {
 		$pph5 = 0;
 	}
 
+	// PPh 15%
 	if ($pkp > 60000000 && $pkp < 250000000) {
 		$pph15 = ($pkp - 60000000) * 0.15;
 	} else if ($pkp > 250000000) {
@@ -346,6 +349,7 @@ if (isset($_POST['hitung'])) {
 		$pph15 = 0;
 	}
 
+	// PPh 25%
 	if ($pkp > 250000000 && $pkp < 500000000) {
 		$pph25 = ($pkp - 250000000) * 0.25;
 	} else if ($pkp > 250000000) {
@@ -354,6 +358,7 @@ if (isset($_POST['hitung'])) {
 		$pph25 = 0;
 	}
 
+	// PPh 30%
 	if ($pkp > 500000000 && $pkp < 5000000000) {
 		$pph30 = ($pkp - 500000000) * 0.30;
 	} else if ($pkp > 5000000000) {
@@ -362,24 +367,27 @@ if (isset($_POST['hitung'])) {
 		$pph30 = 0;
 	}
 
+	// PPh 35%
 	if ($pkp > 5000000000) {
 		$pph35 = $pph35;
 	} else {
 		$pph35 = 0;
 	}
 
+	// PPh 21 Per Tahun
 	$pph21thn 	= $pph5 + $pph15 + $pph25 + $pph30 + $pph35;
-	$pph21mpber	= ($pph21thn - $setor) / $sisabln;
+
+	// Total Pajak Perbulan
+	$pph21mpber	= ($pph21thn - $setor) / $sisabln; //PPh 21 MP Berkala
+
+	// Total Penerimaan MP Berkala
 	$totpenmp 	= "";
 	if (isset($_POST['persen20'])) {
 		$totpenmp 	= $mp80 - $pph21mpber;
 	} else {
 		$totpenmp 	= $mp - $pph21mpber;
 	}
-
 	$totalmp_pajak = ((($mp - $bp) * 12) - $ptkp);
-
-
 	$totpenmp80 = $mp80 - $pph21mpber;
 }
 

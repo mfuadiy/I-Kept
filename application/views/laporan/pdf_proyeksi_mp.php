@@ -232,7 +232,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td>&emsp;&emsp;&emsp; Rp. 60.000.000 x 0%</td>
+			<td>&emsp;&emsp;&emsp; Rp. 50.000.000 x 0%</td>
 			<td>=</td>
 			<td>Rp. 0</td>
 		</tr>
