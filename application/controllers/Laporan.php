@@ -54,6 +54,7 @@ class Laporan extends CI_Controller
 		$data['par20'] 			= $_POST['par20'];
 		$data['totpenmp']   	= $_POST['totpenmp'];
 		$data['totpenmp80'] 	= $_POST['totpenmp80'];
+		$data['total_penmp_pil_1'] 	= $_POST['total_penmp_pil_1'];
 
 		$tampilan = $this->load->view('laporan/pdf_proyeksi_mp', $data, TRUE);
 		$mpdf = new \Mpdf\Mpdf();
@@ -88,6 +89,7 @@ class Laporan extends CI_Controller
 		$data['par20'] 			= $_POST['par20'];
 		$data['totpenmp']   	= $_POST['totpenmp'];
 		$data['totpenmp80'] 	= $_POST['totpenmp80'];
+		$data['total_penmp_pil_1'] 	= $_POST['total_penmp_pil_1'];
 
 		$tampilan = $this->load->view('laporan/pdf_proyeksi_mp_sekaligus', $data, TRUE);
 		$mpdf = new \Mpdf\Mpdf();

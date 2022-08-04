@@ -1,6 +1,4 @@
 <?php
-
-
 // Post
 $henti 		= @$_POST['tgl_brnt'];
 $mulai 		= @$_POST['tgl_mb'];
@@ -412,50 +410,10 @@ $sisaMsBk = $sisaMb->y;
 					Proyeksi Manfaat Pensiun
 				</div>
 				<div class="card-body">
-
-
-
-					<!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  					<li class="nav-item">
-    					<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Data Pribadi</a>
-  					</li>
-			  		<li class="nav-item">
-			    		<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Pekerjaan</a>
-			  		</li>
-			  		<li class="nav-item">
-			    		<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Alamat</a>
-			  		</li>
-			  		<li class="nav-item">
-			    		<a class="nav-link" id="pills-keluarga-tab" data-toggle="pill" href="#pills-keluarga" role="tab" aria-controls="pills-keluarga" aria-selected="false">Data Keluarga</a>
-			  		</li>
-			  		<li class="nav-item">
-			    		<a class="nav-link" id="pills-pensiun-tab" data-toggle="pill" href="#pills-pensiun" role="tab" aria-controls="pills-pensiun" aria-selected="false">Simulasi Manfaat Pensiun</a>
-			  		</li>
-			  	</ul> -->
-
-					<!-- <nav class="nav nav-pills nav-justified mb-4">
-				  <a class="nav-link" href="<?= base_url(); ?>peoples/detail_peserta/<?= $alldata['noreg']; ?>">Data Pribadi</a>
-				  <a class="nav-link" href="<?= base_url(); ?>peoples/detail_peserta_pekerjaan/<?= $alldata['noreg']; ?>">Pekerjaan</a>
-				  <a class="nav-link" href="<?= base_url(); ?>peoples/detail_peserta_alamat/<?= $alldata['noreg']; ?>">Alamat</a>
-				  <a class="nav-link" href="<?= base_url(); ?>peoples/detail_peserta_keluarga/<?= $alldata['noreg']; ?>">Data Keluarga</a>
-				  <a class="nav-link active" href="#">Simulasi Pensiun</a>
-				</nav> -->
-
-
 					<div class="tab-content" id="pills-tabContent">
-						<!--DATA PRIBADI-->
-
-						<!--PEKERJAAN-->
-
-						<!--ALAMAT-->
-
-						<!--DATA KELUARGA-->
-
-						<!--MANFAAT PENSIUN-->
 						<div class="tab-pane fade show active" id="pills-pensiun" role="tabpanel" aria-labelledby="pills-pensiun-tab">
-							<!-- Variabel Perhitungan Proyeksi -->
 
-
+							<!-- Form Perhitungan Proyeksi -->
 							<form method="post" action="">
 								<div class="form-group row">
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Nama</label>
@@ -674,31 +632,12 @@ $sisaMsBk = $sisaMb->y;
 								<button type="submit" class="btn btn-success mt-2 mb-4" id="hitung" name="hitung">Hitung</button>
 							</form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 							<!-- Tampilan Perhitungan Proyeks -->
 							<form method="post" action="<?php
 														if (isset($_POST['persen20'])) {
-															echo base_url(); ?>laporan/pdf_proyeksi_mp/<?= $alldata['noreg'];
-																									} else {
-																										echo base_url(); ?>laporan/pdf_proyeksi_mp_sekaligus/<?= $alldata['noreg'];
+															echo base_url(); ?>laporan/pdf_proyeksi_mp_sekaligus/<?= $alldata['noreg'];
+																												} else {
+																													echo base_url(); ?>laporan/pdf_proyeksi_mp/<?= $alldata['noreg'];
 																																							}
 
 																																								?>" target="_blank">
@@ -721,6 +660,8 @@ $sisaMsBk = $sisaMb->y;
 																											//echo $intervalkrj->d.' hari.';
 																											?>">
 									<input type="text" class="form-control" name="s_mk" id="s_mk" value="<?= $mk; 	?>" hidden>
+									<input type="text" class="form-control" name="total_penmp_pil_1" id="total_penmp_pil_1" value="<?php error_reporting(0);
+																																	echo rupiah($mp - $pph21mpber); 	?>" hidden>
 									<input type="date" class="form-control" name="tgl_lhr" id="tgl_lhr" value="<?= $alldata['tgl_lhr'] ?>">
 									<input type="date" class="form-control" name="tgl_mb" id="tgl_mb" value="<?= $alldata['tgl_mb'] ?>">
 									<input type="date" class="form-control" name="tgl_brnt" id="tgl_brnt" value="<?= @$_POST['tgl_brnt']; ?>">
@@ -755,15 +696,7 @@ $sisaMsBk = $sisaMb->y;
 								</div>
 								<!-- Akhir Data Hidden -->
 
-
-
-
-
-
-
-
-
-
+								<!-- Hasil Perhitungan -->
 								<div class="form-group row">
 									<label for="inputEmail3" class="col-sm-4 col-form-label">Proyeksi PhDP <br><br></label>
 									<div class="col-sm-8">
@@ -849,8 +782,6 @@ $sisaMsBk = $sisaMb->y;
 																													echo rupiah($mpsek20 - $pph2120); ?>">
 									</div>
 								</div>
-
-
 
 								<div class="form-group row" <?php if (isset($_POST['persen20'])) {
 																echo "";
@@ -954,7 +885,7 @@ $sisaMsBk = $sisaMb->y;
 								</div>
 
 								<div class="form-group row">
-									<label for="inputEmail3" class="col-sm-4 col-form-label">PPh Pasal 21 MP Berkala <br>
+									<label for="inputEmail3" class="col-sm-4 col-form-label">PPh Pasal 21 MP Berkala Pertahun<br>
 										<small style="color: blue;"><?php
 																	$abc = $pph21thn - $setor;
 																	echo rupiah($pph21thn) . "  -  " . rupiah($setor) . " = " . rupiah($abc) . " / " . $sisabln;  ?></small></label>
@@ -964,93 +895,23 @@ $sisaMsBk = $sisaMb->y;
 								</div>
 
 								<div class="form-group row">
-									<label for="inputEmail3" class="col-sm-4 col-form-label">Total Penerimaan MP Berkala</label>
+									<label for="inputEmail3" class="col-sm-4 col-form-label">Total Penerimaan MP Berkala <br>
+										<small style="color: blue;"><?php
+																	if (isset($_POST['persen20'])) {
+																		echo rupiah($mp80) . " - " . rupiah($pph21mpber);
+																	} else {
+																		echo rupiah($mp) . " - " . rupiah($pph21mpber);
+																	} ?>
+										</small></label>
 									<div class="col-sm-8">
 										<input type="text" class="form-control" name="totpenmp" id="totpenmp" value="<?= rupiah($totpenmp); ?>">
 									</div>
 								</div>
-
-								<!-- <a href="<?= base_url(); ?>laporan/pdf_proyeksi_mp/<?= $alldata['noreg'];  ?>" class="btn btn-danger">Export PDF</a> -->
-
 								<button type="submit" class="btn btn-danger mt-2 mb-4" id="cetak_pdf" name="cetak_pdf" <?php if (isset($_POST['hitung'])) {
 																														} else {
 																															echo "disabled";
 																														} ?>>Export PDF</button>
 							</form>
-
-
-
-							<!-- <br><br><br><br><br><br><br>
-					<div class="form-group row">
-				    <label for="inputEmail3" class="col-sm-4 col-form-label">PhDP Proyeksi<br>
- 					<small>Asumsi Kenaikan Gaji Pokok sebesar 4% Pertahun</small></label>
-				    <div class="col-sm-8">
-
-				      <input type="text" class="form-control" value="<?php
-
-																		$x = 0;
-																		do {
-																			$x++;
-																			$hasil = ($hasil * 1.04);
-																		} while ($x < $sisaMsBk);
-
-																		echo rupiah(round($hasil, -3));
-
-																		$mp = $hasil * 0.025 * $lamakerja;
-																		$cutmp = $hasil * 0.8;
-																		if ($mp > $cutmp) {
-																			$mpber = $cutmp;
-																		} else {
-																			$mpber = $mp;
-																		}
-																		$mpsek = $mpber * 147.35181;
-																		$mpsek20 = 0.2 * $mpsek;
-																		$mpber80 = 0.8 * $mpber;
-																		?>">
-				     				
-				   
-				    </div>
-					</div>
-
-					<div class="form-group row">
-				    <label for="inputEmail3" class="col-sm-4 col-form-label">Perkiraan MP Berkala Perbulan* <br>
-				    <small>PhDP x 2.5% x Masa Bekerja</small>
-				    </label>
-				    <div class="col-sm-8">
-				    <input type="text" class="form-control" value="<?php echo rupiah(round($mpber, -3)); ?>">
-				    </div>
-					</div>
-
-					<div class="form-group row">
-				    <label for="inputEmail3" class="col-sm-4 col-form-label">Total Nilai Manfaat Pensiun
-				    				<br>
-				    				<small>MP x Faktor Sekaligus**</small>
-				    </label>
-				    <div class="col-sm-8">
-				    <input type="text" class="form-control" value="<?php echo rupiah(round($mpsek, -3)); ?>">
-				    </div>
-					</div>
-
-					<div class="form-group row">
-				    <label for="inputEmail3" class="col-sm-4 col-form-label">Perhitungan MP Sekaligus 20%
-				    				<br>
-				    				<small>Total MP x 20%</small>
-				    </label>
-				    <div class="col-sm-8">
-				    <input type="text" class="form-control" value="<?php echo rupiah(round($mpsek20, -3)); ?>">
-				    </div>
-					</div>
-
-					<div class="form-group row">
-				    <label for="inputEmail3" class="col-sm-4 col-form-label">Perkiraan MP Berkala Perbulan Setelah Diambil 20%
-				    				<br>
-				    				<small>Perkiraan MP x 80%</small>
-				    </label>
-				    <div class="col-sm-8">
-				    <input type="text" class="form-control" value="<?php echo rupiah(round($mpber80, -3)); ?>">
-				    </div>
-				</div> -->
-
 						</div>
 					</div>
 				</div>
