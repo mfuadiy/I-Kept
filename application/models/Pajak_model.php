@@ -24,6 +24,17 @@ class Pajak_model extends CI_Model
         return ($query);
     }
 
+    public function getPajak()
+    {
+        $this->db->select('npk, nama');
+        $this->db->from('dbpn');
+        $this->db->where('p_bln', '10');
+        $this->db->where('p_thn', '2022');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get()->result_array();
+        return ($query);
+    }
+
     public function getAnalytic()
     {
         $this->db->select('*');

@@ -27,8 +27,8 @@ class Pajak extends CI_Controller
 
     public function index()
     {
-        $data['title']          = 'Perhitungan Pajak';
-        $data['judul']          = 'Daftar Peserta Pasif';
+        $data['judul']          = 'Perhitungan Pajak';
+        $data['title']          = 'Daftar Peserta Pasif';
 
         $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pensiun']        = $this->pajak->getPensiun();
@@ -42,10 +42,25 @@ class Pajak extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function cetak_spt()
+    {
+        $data['judul']          = 'Perhitungan Pajak';
+        $data['title']          = 'Cetak SPT I';
+
+        $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pajak']          = $this->pajak->getPajak();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('pajak/cetak_spt', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function detail($npk)
     {
-        $data['title']          = 'Perhitungan Pajak';
-        $data['judul']          = 'Daftar Peserta Pasif';
+        $data['judul']          = 'Perhitungan Pajak';
+        $data['title']          = 'Daftar Peserta Pasif';
         $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pensiun']        = $this->pajak->getDetail($npk);
         $data['jenis_pensiun']  = $this->db->get('jenis_pensiun')->result_array();
