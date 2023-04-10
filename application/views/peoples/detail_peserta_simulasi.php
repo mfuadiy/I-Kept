@@ -216,8 +216,13 @@ $where = array(
 );
 
 // Kode Codeigneter Untuk Mencari Faktor Sekaligus
-$result 	= $ci->db->get_where('aktuaria', $where)->row_array();
-$fgus 		= floatval($result['fktr_sgus']);
+if (isset($_POST['hitung'])) {
+	$result 	= $ci->db->get_where('aktuaria', $where)->row_array();
+	$fgus 		= floatval($result['fktr_sgus']);
+} else {
+	$result 	= $ci->db->get_where('aktuaria', $where)->row_array();
+	$fgus		= floatval(@$_POST['fgus']);
+}
 
 // Perhitungan Masa Kerja
 $intervalmk = date_diff($mli, $brnt);

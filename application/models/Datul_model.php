@@ -7,14 +7,7 @@ class Datul_model extends CI_Model
 {
     public function getPensiun($npk)
     {
-        $this->db->select('*');
-        $this->db->from('dbpnm_pn');
-        $this->db->join('pn', 'pn.npk = dbpnm_pn.npk', 'right');
-        $this->db->where('dbpnm_pn.npk', $npk);
-        // $this->db->or_where('dbpnm.kota', 'Karawang');
-        $this->db->order_by('dbpnm_pn.nama', 'ASC');
-        $query = $this->db->get()->row_array();
-        return ($query);
+        return $this->db->get_where('dbpnm_pn', ['npk' => $npk])->row_array();
     }
 
     public function getAhliWaris($npk)
@@ -27,17 +20,13 @@ class Datul_model extends CI_Model
         return $this->db->get('datul')->result_array();
     }
 
-    public function getAllPensiun($limit, $start, $keyword = null)
+    public function getAllPensiun()
     {
         $this->db->select('dbpnm_pn.npk, dbpnm_pn.nopen, dbpnm_pn.nama');
         $this->db->from('dbpnm_pn');
-        if ($keyword) {
-            $this->db->like('dbpnm_pn.npk', $keyword);
-            $this->db->or_like('dbpnm_pn.nama', $keyword);
-        }
         $this->db->join('dbpn', 'dbpn.npk = dbpnm_pn.npk');
-        $this->db->where('dbpn.p_bln', '02');
-        $this->db->where('dbpn.p_thn', '2022');
+        $this->db->where('dbpn.p_bln', '01');
+        $this->db->where('dbpn.p_thn', '2023');
         $this->db->order_by('dbpn.nama', 'ASC');
         return $this->db->get()->result_array();
     }

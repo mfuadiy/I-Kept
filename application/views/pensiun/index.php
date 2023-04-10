@@ -314,7 +314,7 @@
 							<div class="input-group">
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" id="file_akta_nikah" name="file_akta_nikah" accept=".jpg,.png,.jpeg,.bmp, .pdf">
-									<label class="custom-file-label" for="inputGroupFile01">Akta Nikah</label>
+									<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 								</div>
 							</div>
 							<label>Masukan Scan Salinan Akta Nikah bila pensiunan janda / duda tsb menikah lagi | Maks. 2 Megabyte</label>

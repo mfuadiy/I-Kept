@@ -17,7 +17,7 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Nomor Pensiun</th>
+							<th>NPK</th>
 							<th>Nama Peserta</th>
 							<th>Aksi</th>
 							<th style="text-align: center;">Update Simadu</th>
@@ -33,23 +33,22 @@
 								</td>
 							</tr>
 						<?php endif; ?>
-						<?php foreach ($peoples as $ppl) : ?>
+						<?php $i=1; foreach ($peoples as $ppl) : ?>
 							<tr>
-								<?php $npk = $ppl['nopen'];  ?>
-								<th><?= ++$start; ?></th>
-								<td><?= $ppl['nopen']; ?></td>
+								<?php $npk = $ppl['npk'];  ?>
+								<th><?= $i++; ?></th>
+								<td><?= $ppl['npk']; ?></td>
 								<td><?= $ppl['nama']; ?></td>
 								<td>
 									<a href="<?= base_url(); ?>datul/detail/<?= $ppl['npk']; ?>" class="badge badge-warning">detail</a>
 								</td>
 								<td style="text-align: center;">
-									<input class="simadu" id="simadu" type="checkbox" <?= simadu($ppl['nopen'], $datul['simadu']); ?> data-nopen="<?= $ppl['npk']; ?>" data-simadu="<?= $datul['simadu']; ?>">
+									<input class="simadu" id="simadu" type="checkbox" <?= simadu($ppl['npk'], $datul['simadu']); ?> data-npk="<?= $ppl['npk']; ?>" data-simadu="<?= $datul['simadu']; ?>">
 								</td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
-				</table>
-				<!-- <?= $this->pagination->create_links(); ?> -->
+				</table>		
 			</div>
 		</div>
 	</div>

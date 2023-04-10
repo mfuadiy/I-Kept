@@ -50,11 +50,11 @@ class Pajak extends CI_Controller
         $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pajak']          = $this->pajak->getPajak();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        // $this->load->view('templates/header', $data);
+        // $this->load->view('templates/sidebar', $data);
+        // $this->load->view('templates/topbar', $data);
         $this->load->view('pajak/cetak_spt', $data);
-        $this->load->view('templates/footer');
+        // $this->load->view('templates/footer');
     }
 
     public function detail($npk)

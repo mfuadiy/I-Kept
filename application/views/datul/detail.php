@@ -3,7 +3,7 @@
 		<div class="col-12">
 
 			<h3 style="text-align: center;">DATA ULANG PENSIUNAN</h3>
-			<form action="<?= base_url(); ?>datul/update/<?= $pensiun['nopen']; ?>" method="post" enctype="multipart/form-data">
+			<form action="<?= base_url(); ?>datul/update/<?= $pensiun['npk']; ?>" method="post" enctype="multipart/form-data">
 				<!-- Data Pensiunan -->
 				<div class="card mt-2">
 					<div class="card-body">
@@ -334,6 +334,7 @@
 																											} else {
 																												echo ($pensiun['npk']);
 																											} ?>">
+
 							<button class="btn btn-danger add-more mt-2 mb-4" type="submit" <?= $ada1; ?>>
 								<i class="glyphicon glyphicon-plus"></i> Simpan
 							</button>

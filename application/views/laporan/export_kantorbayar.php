@@ -13,7 +13,7 @@ header("Expires: 0");
 $ci = get_instance();
 $ci->db->select('*');
 $ci->db->from('dbpn');
-$ci->db->where('p_bln', '07');
+$ci->db->where('p_bln', '11');
 $ci->db->where('p_thn', '2022');
 $ci->db->group_by('lokgj');
 $query = $ci->db->get()->result_array();
@@ -48,8 +48,8 @@ $query = $ci->db->get()->result_array();
 
                     $ci->db->select('*');
                     $ci->db->from('dbpn');
-                    $ci->db->where('p_bln', '10');
-                    $ci->db->where('p_thn', '2022');
+                    $ci->db->where('p_bln', '01');
+                    $ci->db->where('p_thn', '2023');
                     $ci->db->where('lokgj', $b['lokgj']);
                     echo $ci->db->count_all_results();
                     ?></td>
@@ -57,14 +57,14 @@ $query = $ci->db->get()->result_array();
                     <?php
                     $ci->db->select_sum('mp');
                     $ci->db->where('kd_bank', $b['lokgj']);
-                    $ci->db->where('p_bln', '10');
-                    $ci->db->where('p_thn', '2022');
+                    $ci->db->where('p_bln', '01');
+                    $ci->db->where('p_thn', '2023');
                     $mp = $ci->db->get('pajak')->row_array();
 
                     $ci->db->select_sum('pajak');
                     $ci->db->where('kd_bank', $b['lokgj']);
-                    $ci->db->where('p_bln', '10');
-                    $ci->db->where('p_thn', '2022');
+                    $ci->db->where('p_bln', '01');
+                    $ci->db->where('p_thn', '2023');
                     $pjk = $ci->db->get('pajak')->row_array();
 
                     $jml = $mp['mp'] - $pjk['pajak'];
@@ -75,7 +75,7 @@ $query = $ci->db->get()->result_array();
                     <?php
                     $ci->db->select_sum('pajak_bln');
                     $ci->db->where('lokgj', $b['lokgj']);
-                    $ci->db->where('p_bln', '09');
+                    $ci->db->where('p_bln', '12');
                     $ci->db->where('p_thn', '2022');
                     $pjk_lm = $ci->db->get('dbpn')->row_array();
 
